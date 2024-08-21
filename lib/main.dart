@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home:userCard()
-  ));
+  runApp(MaterialApp(home: UserCard()));
 }
 
-class userCard extends StatelessWidget {
- 
+class UserCard extends StatefulWidget {
+  @override
+  State<UserCard> createState() => _UserCardState();
+}
 
+class _UserCardState extends State<UserCard> {
+  int level = 0;
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black87,
       appBar: AppBar(
-        title:Text("User Card"),
+        title: Text("User Card"),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
         elevation: 0.0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            level += 1;
+          });
+        },
+        backgroundColor: Colors.grey,
+        child: Icon(Icons.add),
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
             Center(
               child: CircleAvatar(
@@ -34,7 +44,6 @@ class userCard extends StatelessWidget {
             Divider(
               height: 50.0,
               color: Colors.blue,
-
             ),
             Text(
               "Name",
@@ -44,16 +53,15 @@ class userCard extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10.0),
-             Text(
+            Text(
               "Keynes Bizimana",
               style: TextStyle(
-                color: Colors.blue,
-                letterSpacing: 2.0,
-                fontWeight:FontWeight.bold
-              ),
+                  color: Colors.blue,
+                  letterSpacing: 2.0,
+                  fontWeight: FontWeight.bold),
             ),
-             SizedBox(height: 30.0),
-             Text(
+            SizedBox(height: 30.0),
+            Text(
               "Current Developer Level",
               style: TextStyle(
                 color: Colors.white,
@@ -62,8 +70,9 @@ class userCard extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              "100",
+              "$level",
               style: TextStyle(
+                fontSize: 40,
                   color: Colors.blue,
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.bold),
@@ -71,27 +80,30 @@ class userCard extends StatelessWidget {
             SizedBox(height: 30.0),
             Row(
               children: [
-                Icon(
-                  Icons.email_outlined,
-                  color:Colors.grey
-                ),
-                SizedBox(width:10.0),
+                Icon(Icons.email_outlined, color: Colors.grey),
+                SizedBox(width: 10.0),
                 Text(
                   "keynesbizimana@gmail.com",
-                  style: TextStyle(color:Colors.grey,fontSize: 18,letterSpacing: 1.8),
+                  style: TextStyle(
+                      color: Colors.grey, fontSize: 18, letterSpacing: 1.8),
                 ),
-                
-                
+               
+               
               ],
-            )
+            ),
+             Center(
+               child: ElevatedButton(
+                    onPressed: (){},
+                    
+                     style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.blue)
+                     ),
+                      child: Text("Submit"),
+                     ),
+             )
           ],
         ),
-        
-        
-        ),
-        
-      
+      ),
     );
   }
 }
-
