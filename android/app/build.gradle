@@ -37,6 +37,23 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def branchName = getBranchName()
+            def outputFileName = "${variant.name}-${branchName}-${variant.versionName}.apk"
+            outputFileName = outputFileName.replace('/', '_') // Replace '/' with '_'
+            outputFileName = outputFileName.replace(' ', '_') // Replace ' ' with '_'
+            output.outputFileName = outputFileName
+        }
+    }
+}
+    def getBranchName() {
+    def branchName = 'main' // Default branch name
+    def process = 'git rev-parse --abbrev-ref HEAD'.execute() // Get branch name from Git
+    branchName = process.text.trim()
+    return branchName
+
+    
 }
 
 flutter {
